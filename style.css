@@ -1,0 +1,9 @@
+body {
+  background: rgb(179, 238, 255);
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
