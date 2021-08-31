@@ -7,3 +7,20 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 10vh;
+}
+
+.rank-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rank-item {
+  background: white;
+}
