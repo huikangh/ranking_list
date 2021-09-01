@@ -10,12 +10,22 @@ addButton.addEventListener("click", addItem);
 function addItem(event) {
     //prevent form from submitting
     event.preventDefault(); 
-    // create new list item with user input
+    // create new rank row
+    const newRow = document.createElement("div");
+    newRow.classList.add("rank-row");
+    newRow.draggable = true;
+    // create new rank item with user input
     const newItem = document.createElement("li");
-    newItem.innerText = userInput.value;
     newItem.classList.add("rank-item");
-    // append the item div to rank list
-    rankList.appendChild(newItem);
+    newItem.innerText = userInput.value;
+    // create delete button
+    const newButton = document.createElement("button");
+    newButton.classList.add("delete-btn");
+    newButton.innerText = "DEL";
+    // append rank-item and delete-btn to rank-row, then append rank-row to rank-list
+    newRow.appendChild(newItem);
+    newRow.appendChild(newButton);
+    rankList.appendChild(newRow);
     // clear input value
     userInput.value = "";
 }
