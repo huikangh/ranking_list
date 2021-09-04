@@ -22,7 +22,15 @@ rankList.addEventListener("dragover", event => {
         rankList.insertBefore(draggedRow, afterElement);
     }
     // update the ordering of the rank items in local storage
-    // to be continued...
+    // first, gather all the existing rank rows
+    rankRows = document.querySelectorAll(".rank-row");
+    let localRankList = [];
+    // then, for each rank row, retrieve its rank item value, and push to list
+    rankRows.forEach(function(rankRow){
+        localRankList.push(rankRow.children[0].innerText);
+    })
+    // finally, update the new list into local storage
+    localStorage.setItem("localRankList", JSON.stringify(localRankList));
 })
 
 // add an event listener for a rank row
