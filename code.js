@@ -10,6 +10,8 @@ addButton.addEventListener("click", addItem);
 rankList.addEventListener('click', deleteRow);
 rows.forEach(row => addDragListener(row));
 
+
+
 // event listener for reordering the dragged row
 rankList.addEventListener("dragover", event => {
     event.preventDefault();
@@ -21,9 +23,10 @@ rankList.addEventListener("dragover", event => {
     } else {
         rankList.insertBefore(draggedRow, afterElement);
     }
+
     // update the ordering of the rank items in local storage
     // first, gather all the existing rank rows
-    rankRows = document.querySelectorAll(".rank-row");
+    const rankRows = document.querySelectorAll(".rank-row");
     let localRankList = [];
     // then, for each rank row, retrieve its rank item value, and push to list
     rankRows.forEach(function(rankRow){
@@ -31,17 +34,25 @@ rankList.addEventListener("dragover", event => {
     })
     // finally, update the new list into local storage
     localStorage.setItem("localRankList", JSON.stringify(localRankList));
+
+    // update rank row colors accordingly based on ranking
+    updateColor();
 })
+
 
 // add an event listener for a rank row
 function addDragListener(rankRow) {
     rankRow.addEventListener("dragstart", () => {
         rankRow.classList.add("dragging");
+        updateColor();
     })
     rankRow.addEventListener("dragend", () => {
         rankRow.classList.remove("dragging");
+        updateColor();
+        
     })
 }
+
 
 // get the rank-row that is right after the dragged rank-row
 function getDragAfterElement(y) {
@@ -62,6 +73,7 @@ function getDragAfterElement(y) {
         }
     }, {offset: Number.NEGATIVE_INFINITY} ).element;
 }
+
 
 // create a new rank row and add it to the rank list
 function addItem(event) {
@@ -90,7 +102,10 @@ function addItem(event) {
     addDragListener(newRow);
     // clear input value
     userInput.value = "";
+    // update rank row colors accordingly based on ranking
+    updateColor();
 }
+
 
 // if a delete button is being clicked, delete the corresponding rank row
 function deleteRow(event) {
@@ -105,7 +120,10 @@ function deleteRow(event) {
         // remove the rank item from local storage by passing in the rank row
         removeLocalItems(rankRow);
     }
+    // update rank row colors accordingly based on ranking
+    updateColor();
 }
+
 
 // retrieve and return all existing rank items from local storage in a list
 function retrieveLocal() {
@@ -126,6 +144,7 @@ function saveLocalItems(itemValue) {
     localStorage.setItem("localRankList", JSON.stringify(localRankList));
 }
 
+
 // given a rank row, remove the corresponding rank item from local storage
 function removeLocalItems(rankRow) {
     let localRankList = retrieveLocal();
@@ -136,6 +155,7 @@ function removeLocalItems(rankRow) {
     // update local storage
     localStorage.setItem("localRankList", JSON.stringify(localRankList));
 }
+
 
 // load in the rank items from local storage to rank list when webpage initialize
 function loadLocalItems() {
@@ -160,5 +180,28 @@ function loadLocalItems() {
         rankList.appendChild(newRow);
         // add a dragging event listener for the new row
         addDragListener(newRow);
+        // update rank row colors accordingly based on ranking
+        updateColor();
     })
+}
+
+// change the background color of the top 3 rank rows to show priority
+function updateColor() {
+    const rankRows = [...document.querySelectorAll(".rank-row")];
+    for (let i = 0; i<rankRows.length; i++) {
+        if (i === 0) {
+            rankRows[i].style.backgroundColor = 'rgb(247, 116, 116)';
+        } else if (i === 1) {
+            rankRows[i].style.backgroundColor = 'rgb(245, 176, 49)';
+        } else if (i === 2) {
+            rankRows[i].style.backgroundColor = 'rgb(245, 227, 66)';
+        } else {
+            rankRows[i].style.backgroundColor = 'rgb(255, 255, 255)';
+        }
+    }
+    // when dragged, the dragged row will be white
+    const draggedRow = document.querySelector(".dragging");
+    if (draggedRow != null) {
+        draggedRow.style.backgroundColor = 'rgb(255, 255, 255)';
+    }
 }
