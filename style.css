@@ -1,5 +1,17 @@
+html {
+  height: 100%;
+}
+
 body {
-  background: rgb(115, 164, 230);
+  background: url("img/space2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  color: white;
+  transform: scale(1.2);
 }
 
 .title {
@@ -28,7 +40,7 @@ body {
 
 /* rank list container */
 .rank-list {
-  background: rgb(92, 95, 99);
+  background: rgb(60, 70, 100);
   width: 400px;
   margin: auto;
   border: 1px solid black;
@@ -56,11 +68,18 @@ body {
 
 /* the delete button of each rank row */
 .delete-btn {
+  opacity: 0;
   padding: 0.5rem;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+}
+
+/* transition for the delete button when the rank row is hovered*/
+.rank-row:hover > .delete-btn {
+  opacity: 1;
 }
 
 /* when a rank row is being dragged */
 .dragging {
-  opacity: 0.5;
+  opacity: 0.6;
 }

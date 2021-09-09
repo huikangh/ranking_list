@@ -195,13 +195,17 @@ function updateColor() {
             rankRows[i].style.backgroundColor = 'rgb(245, 176, 49)';
         } else if (i === 2) {
             rankRows[i].style.backgroundColor = 'rgb(245, 227, 66)';
+        } else if (i === 3) {
+            rankRows[i].style.backgroundColor = 'rgb(127, 214, 105)';
+        } else if (i === 4) {
+            rankRows[i].style.backgroundColor = 'rgb(135, 183, 222)';
         } else {
-            rankRows[i].style.backgroundColor = 'rgb(255, 255, 255)';
+            rankRows[i].style.backgroundColor = 'rgb(225, 225, 225)';
         }
     }
     // when dragged, the dragged row will be white
     const draggedRow = document.querySelector(".dragging");
     if (draggedRow != null) {
-        draggedRow.style.backgroundColor = 'rgb(255, 255, 255)';
+        draggedRow.style.backgroundColor = 'rgb(225, 225, 225)';
     }
 }
