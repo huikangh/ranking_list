@@ -93,7 +93,7 @@ function addItem(event) {
     // create delete button
     const newButton = document.createElement("button");
     newButton.classList.add("delete-btn");
-    newButton.innerText = "DEL";
+    newButton.innerHTML = "<i class='fas fa-times'></i>";
     // append rank-item and delete-btn to rank-row, then append rank-row to rank-list
     newRow.appendChild(newItem);
     newRow.appendChild(newButton);
@@ -173,7 +173,7 @@ function loadLocalItems() {
         // create delete button
         const newButton = document.createElement("button");
         newButton.classList.add("delete-btn");
-        newButton.innerText = "DEL";
+        newButton.innerHTML = "<i class='fas fa-times'></i>";
         // append rank-item and delete-btn to rank-row, then append rank-row to rank-list
         newRow.appendChild(newItem);
         newRow.appendChild(newButton);
